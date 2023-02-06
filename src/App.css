@@ -1,38 +1,47 @@
-.App {
-  text-align: center;
+
+.chart{
+  margin: 20px;
+  max-width: 80%;
+  border: 2px solid red;
+  height: 500px;
+}
+.progressbar{
+	position: relative;
+	overflow: hidden;
+	width: 350px;
+	height: 35px;
+	border-radius: 5px;
+	background-color: #eee;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.progressPercent{
+	font-weight: 600;
+	font-family:'Franklin Gothic Medium';
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	color: #eee;
+	text-shadow: -1px 0 #555, 0 1px #555, 1px 0 #555, 0 -1px #555;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btn{
+	display: block;
+	margin: 5rem auto;
+	border: none;
+	border-radius: 3px;     
+	outline: none;
+	width: 100px;
+	height: 40px;
+	background-color: #937DC2;
+	transition: box-shadow 0.5s;
+	font-size: 16px;
+	font-family:arial;
+	color: #fff;
+	cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn:hover{
+	-webkit-box-shadow: inset 100px 0 0 0 #7c54d1;
+    box-shadow: inset 100px 0 0 0 #7c54d1;
 }
