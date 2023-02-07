@@ -4,7 +4,7 @@ export default function ProgressBar() {
     const [filled, setFilled] = useState(0);
 	const [isRunning, setIsRunning] = useState(false);
 	useEffect(() => {
-		if (filled < 100 && isRunning) {
+		if (filled < 80 && isRunning) {
 			setTimeout(() => setFilled(prev => prev += 2), 50)
 		}
 	},[filled, isRunning])

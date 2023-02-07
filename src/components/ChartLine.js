@@ -35,6 +35,15 @@ export default function Charts(props) {
             text: "Districts Cities In " + location,
             fontSize: 25,
           },
+          animations: {
+            tension: {
+              duration: 1000,
+              easing: 'linear',
+              from: 1,
+              to: 0,
+              loop: true
+            }
+          },
           plugins: {
             title: {
                 display: true,

@@ -21,7 +21,7 @@ ChartJS.register(
 export default function Charts(props) {
   const { chartData, displayTitle, displayLegend, legendPosition, location } =
     props;
-  console.log(chartData);
+  // console.log(chartData);
  
   return (
     <>
@@ -33,6 +33,15 @@ export default function Charts(props) {
             display: true,
             text: "Districts Cities In " + location,
             fontSize: 25,
+          },
+          animations: {
+            tension: {
+              duration: 1000,
+              easing: 'easeInOutElastic',
+              from: 1,
+              to: 2,
+              loop: true
+            }
           },
           plugins: {
             title: {
