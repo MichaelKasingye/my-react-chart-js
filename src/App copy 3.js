@@ -9,17 +9,12 @@ import { filterData } from './utils/filteredData';
 
 import './App.css'
 
-// var graphData = null;
 
 const App = () => {
- 
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [filteredData, setFilteredData] = useState(filterData);
   const [selected, setSelected] = useState('');
   const [selectedRange, setSelectedRange] = useState('');
-  const [graphData, setGraphData] = useState(undefined);
-
-  console.log(graphData);
 
   const [startDate, setStartDate] = useState(new Date());
   // const [endDate, setEndDate] = useState(new Date());
@@ -60,8 +55,6 @@ const App = () => {
 
   //   return addFilteredValues;
   // }
-
-
 
   const extract7thDay=(dayNumber)=>{
     const date = new Date();
@@ -111,15 +104,22 @@ const filteredDataInfo = filterData.filter((item) => {
   const itemDate = new Date(item.date);
   return itemDate >= startDate && itemDate <= endDate;
 });
+// console.log(filteredDataInfo);
 
 
 function getAddedFilteredValues(label) {
   let aggregateddata = extractTimeData(filteredDataInfo)
+// console.log(aggregateddata);
+
   const addFilteredValues = aggregateddata.filter((item) => {
-    if(selectedRange==='dayNames') return item.time.dayName === label;
-    if(selectedRange==='hours') return item.time.hours.toString() === label;
-  
-    return item.time.monthName === label
+    // if(selectedRange==='dayNames') return item.time.dayName === label;
+    // if(selectedRange==='monthNames') return item.time.monthName === label;
+    // if(selectedRange==='hours') return item.time.hours.toString() === label;
+    // return
+
+    // return item.time.dayName === label
+    // return item.time.monthName === label
+    return item.time.hours.toString() === label
 
   }).reduce(
     (accumulator, currentValue) => accumulator + currentValue.value,
@@ -130,8 +130,27 @@ function getAddedFilteredValues(label) {
 }
 
 
+// console.log(filteredNewDataInfo);
 
+  // getAddedFilteredValues(label)
   const labels = ["Rooms", "Gym", "Restaurant", "Beach", "Boat ride"];// Put this in a JS Set function to avoid repeated data and have unique values
+
+  // const chartData = {
+  //   labels: ["Rooms", "Gym", "Restaurant", "Beach", "Boat ride"],
+  //   datasets: [
+  //     {
+  //       label: 'My Data',
+  //       // data: filteredDataInfo.map((item) => item.value),
+  //       data: labels.map((item) => getAddedFilteredValues(item)),
+  //       backgroundColor: 'rgba(75,192,192,0.4)',
+  //       borderColor: '#44bd32',
+  //       borderWidth: 1
+  //     }
+  //   ]
+  // };
+  // console.log(getAddedFilteredValues("Rooms"));
+
+  // const labels = ["Rooms", "Gym", "Restaurant", "Beach", "Boat ride"];// Put this in a JS Set function to avoid repeated data and have unique values
   const monthNames = [
     "January",
     "February",
@@ -150,32 +169,45 @@ function getAddedFilteredValues(label) {
   const hours = ["1","2","3","4","5","6","7","8","9","10","11","12",
                     "13","14","15","16","17","18","19","20","21","22","23","24",]
   const chartData = {
-   
-    labels:graphData?graphData:monthNames,
+    // labels: selectedRange==='dayNames'?dayNames:null,
+    // labels: selectedRange==='monthNames'?monthNames:null,
+    // labels: selectedRange==='hours'?hours:null,
+
+    labels:hours,
 
     datasets: [
       {
         label: 'My Data',
-        data: graphData!==undefined?graphData.map((item) => getAddedFilteredValues(item)):monthNames.map((item) => getAddedFilteredValues(item)),
+        // data: filteredDataInfo.map((item) => item.value),
+        // data: timeData.monthName.map((item) => getAddedFilteredValues(item)),
+        // data: timeData.map((item) => item.time.days),
+        // data: dayNames.map((item) => getAddedFilteredValues(item)),
+        // data: hours.map((item) => getAddedFilteredValues(item)),
+        // data: monthNames.map((item) => getAddedFilteredValues(item)),
+
+        // data: selectedRange==='dayNames'?dayNames.map((item) => getAddedFilteredValues(item)):null,
+        // data: selectedRange==='monthNames'?monthNames.map((item) => getAddedFilteredValues(item)):null,
+        data: selectedRange==='hours'?hours.map((item) => getAddedFilteredValues(item)):null,
+
+        // data: timeData.map((item) => item.value),
+        // data: selectedRange?
+        //   selectedRange==='monthNames'?monthNames.map((item) => getAddedFilteredValues(item)):null
+          
+        // :null,
+
         backgroundColor: 'rgba(75,192,192,0.4)',
         borderColor: '#44bd32',
         borderWidth: 1
       }
     ]
   };
-// console.log(graphData);
 
-useEffect(()=>{
-  setGraphData(monthNames);
-  setSelectedRange('monthNames');
-  setStartDate(extract7thDay(366))
-},[])
 
   return (
     <>
-    <button onClick={()=>{setGraphData(dayNames);setSelectedRange('dayNames');  setStartDate(extract7thDay(6))}} >Weekly</button>
-    <button onClick={()=>{setGraphData(monthNames); setSelectedRange('monthNames'); setStartDate(extract7thDay(366))}} >Monthly</button>
-    <button onClick={()=>{setGraphData(hours); setSelectedRange('hours'); setStartDate(extract7thDay(1))}} >Daily</button>
+    <button onClick={()=>{setSelectedRange('dayNames');setStartDate(extract7thDay(30))}} >Weekly</button>
+    <button onClick={()=>{setSelectedRange('monthNames');setStartDate(extract7thDay(366))}} >Monthly</button>
+    <button onClick={()=>{setSelectedRange('hours');setStartDate(extract7thDay(0))}} >Daily</button>
 
       
       <div className="App">
