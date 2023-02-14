@@ -197,23 +197,27 @@ console.log(monthNames);
   //     labels.map((services) => addDataset(services, dayNames.map((item) => getAddedFilteredValues( services, item)), '#44bd32', 'rgba(75,192,192,1)', 1))
   //   }
 
-  if(selectedRange === "dayNames") labels.map((services) => addDataset(services, dayNames.map((item) => getAddedFilteredValues( services, item)), '#44bd32', 'rgba(75,192,192,1)', 1))
-  if(selectedRange === "monthNames") labels.map((services) => addDataset(services, monthNames.map((item) => getAddedFilteredValues( services, item)), '#44bd32', 'rgba(75,192,192,1)', 1))
-  if(selectedRange === "hours") labels.map((services) => addDataset(services, hours.map((item) => getAddedFilteredValues( services, item)), '#44bd32', 'rgba(75,192,192,1)', 1))
+  // if(selectedRange === "dayNames") labels.map((services) => addDataset(services, dayNames.map((item) => getAddedFilteredValues( services, item)), '#44bd32', 'rgba(75,192,192,1)', 1))
+  // if(selectedRange === "monthNames") labels.map((services) => addDataset(services, monthNames.map((item) => getAddedFilteredValues( services, item)), '#44bd32', 'rgba(75,192,192,1)', 1))
+  // if(selectedRange === "hours") labels.map((services) => addDataset(services, hours.map((item) => getAddedFilteredValues( services, item)), '#44bd32', 'rgba(75,192,192,1)', 1))
   
   
-  // extract7thDay(366)
   useEffect(() => {
     setStartDate(extractNthDay(366))
   setGraphData(monthNames);
-    
+  labels.map((services) => addDataset(services, monthNames.map((period) => getAddedFilteredValues( services, period, startDate, endDate)), '#44bd32', 'rgba(75,192,192,1)', 1))
 }, [])
+
+    // const initialGraph = useMemo(() => {
+    //   const fillGraph = labels.map((services) => addDataset(services, monthNames.map((period) => getAddedFilteredValues( services, period, startDate, endDate)), '#44bd32', 'rgba(75,192,192,1)', 1))
+    //   return fillGraph 
+    // }, [labels, addDataset]);
+    
 
     const initialGraph = useMemo(() => {
       const fillGraph = labels.map((services) => addDataset(services, monthNames.map((period) => getAddedFilteredValues( services, period, startDate, endDate)), '#44bd32', 'rgba(75,192,192,1)', 1))
       return fillGraph 
     }, [labels, addDataset]);
-    
 
   return (
     <>
