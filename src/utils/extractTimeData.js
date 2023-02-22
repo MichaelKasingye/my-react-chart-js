@@ -33,8 +33,7 @@ export const extractTimeData = (filterData) => {
 
 
   export const extractNthDay=(dayNumber)=>{
-    console.log("dayNumber........................................");
-    const date = new Date();
+   const date = new Date();
     date.setDate(date.getDate() - dayNumber);
     return date;
   }

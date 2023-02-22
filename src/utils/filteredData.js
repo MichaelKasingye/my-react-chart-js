@@ -462,7 +462,7 @@ export const filterData = [
   },
   { label: "Restaurant", value: 40, date: "2023-02-13 08:30:00.000" },
   { label: "Beach", value: 50, date: "2023-02-13 12:00:00.000" },
-  { label: "Boat ride", value: 60, date: "2023-02-13 14:45:30.100" },
+  { label: "Boat ride", value: 60, date: "2023-02-14 14:45:30.100" },
 
   { 
     label: "Rooms",
@@ -477,10 +477,10 @@ export const filterData = [
   {
     label: "Gym",
     value: 30,
-    date: "2023-02-06 10:15:20.200",
+    date: "2023-02-20 10:15:20.200",
   },
-  { label: "Restaurant", value: 10, date: "2023-02-06 08:30:00.000" },
+  { label: "Restaurant", value: 10, date: "2023-02-20 08:30:00.000" },
   { label: "Beach", value: 80, date: "2023-02-17 04:30:00.000" },
-  { label: "Boat ride", value: 60, date: "2023-02-02 19:45:30.100" },
+  { label: "Boat ride", value: 60, date: "2023-02-20 19:45:30.100" },
 
 ];

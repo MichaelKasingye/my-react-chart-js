@@ -44,18 +44,19 @@ function getPeriodOfService(service, period, data) {
   }
 }
 
-
+const periods = []
   
   export function getAddedFilteredValues( service, period, startDate, endDate) {
     // labels.map(services => )
     const filteredByDateRange = filteredDataInfo(startDate, endDate);
+    // console.log(filteredByDateRange);
     const addFilteredValues = getPeriodOfService(service, period, filteredByDateRange)?.filter((item) => {
       if(period === "Sunday" || period === "Monday" || period === "Tuesday" || period === "Wednesday" || period === "Thursday" || period === "Friday" || period === "Saturday"){
         
         return item.time.dayName === period}
   
       if (period === "January" || period === "February" || period === "March" || period === "April" || period === "May" || period === "June" || period === "July" || period === "August" || period === "September" || period === "October" || period === "November"|| period === "December") {
-        
+        // periods.push(item.time?.monthName === period)
         return item.time?.monthName === period
       }
   
@@ -71,3 +72,25 @@ function getPeriodOfService(service, period, data) {
   
     return addFilteredValues;
   }
+
+  export function getAddedFilteredMonths( service, period, startDate, endDate) {
+    // labels.map(services => )
+    const filteredByDateRange = filteredDataInfo(startDate, endDate);
+    // console.log(filteredByDateRange);
+    const addFilteredValues = getPeriodOfService(service, period, filteredByDateRange)?.filter((item) => {
+      if(period === "Sunday" || period === "Monday" || period === "Tuesday" || period === "Wednesday" || period === "Thursday" || period === "Friday" || period === "Saturday"){
+        
+        return item.time.dayName === period}
+  
+      if (period === "January" || period === "February" || period === "March" || period === "April" || period === "May" || period === "June" || period === "July" || period === "August" || period === "September" || period === "October" || period === "November"|| period === "December") {
+        // periods.push(item.time?.monthName === period)
+        console.log(item.time?.monthName === period)
+        return item.time?.monthName === period
+      }
+  
+      if (period === "1" || period === "2" || period === "3" || period === "4" || period === "5" || period === "6" || period === "7" || period === "8" || period === "9" || period === "10"|| period === "11"|| period === "12" || period === "13" || period === "14" || period === "15" || period === "16" || period === "17" || period === "18" || period === "19" || period === "20"|| period === "21"|| period === "22" ||period === "23" || period === "24") {
+        
+        return item.time.hours.toString() === period
+      }
+  
+    })}
