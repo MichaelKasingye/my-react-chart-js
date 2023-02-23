@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo } from 'react';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { dayNames, hours, labels, monthNames } from './utils/labels';
 
 import { Line } from 'react-chartjs-2';
 import Charts from './components/ChartBar';
-import { filterData } from './utils/filteredData';
+import { filterData,getAddedFilteredValues } from './utils/filteredData';
 
 import './App.css'
 
@@ -113,20 +114,20 @@ const App = () => {
 
 
 
-  const chartData = {
-    labels: filteredData.map(item => item.label),
-    datasets: []
-  };
+  // const chartData = {
+  //   labels: filteredData.map(item => item.label),
+  //   datasets: []
+  // };
 
-  const addDataset = (label, data, bgColor, borderColor, borderWidth) => {
-    chartData.datasets.push({
-      label,
-      data,
-      backgroundColor: bgColor,
-      borderColor: borderColor,
-      borderWidth: borderWidth
-    });
-  };
+  // const addDataset = (label, data, bgColor, borderColor, borderWidth) => {
+  //   chartData.datasets.push({
+  //     label,
+  //     data,
+  //     backgroundColor: bgColor,
+  //     borderColor: borderColor,
+  //     borderWidth: borderWidth
+  //   });
+  // };
 
   // addDataset('Dataset 1', filteredData.map(item => item.value), 'rgba(75,192,192,0.4)', 'rgba(75,192,192,1)', 1);
   // addDataset('Dataset 2', anotherFilteredData.map(item => item.value), 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)', 2);
@@ -168,7 +169,6 @@ const App = () => {
 
 
   function getAddedFilteredValues(label) {
-    console.log(label);
     let aggregateddata = extractTimeData(filteredDataInfo)
     const addFilteredValues = aggregateddata.filter((item) => {
       if (selectedRange === 'dayNames') return item.time.dayName === label;
@@ -223,27 +223,29 @@ const App = () => {
 
 
 
-  // const chartData = {
-  //   labels: filteredData.map(item => item.label),
-  //   datasets: []
-  // };
+  const chartData = {
+    // labels: filteredData.map(item => item.label),
+    labels: graphData ? graphData : monthNames,
+    datasets: []
+  };
 
-  // const addDataset = (label, data, bgColor, borderColor, borderWidth) => {
-  //   chartData.datasets.push({
-  //     label,
-  //     data,
-  //     backgroundColor: bgColor,
-  //     borderColor: borderColor,
-  //     borderWidth: borderWidth
-  //   });
-  // };
+  const addDataset = (label, data, bgColor, borderColor, borderWidth) => {
+    chartData.datasets.push({
+      label,
+      data,
+      backgroundColor: bgColor,
+      borderColor: borderColor,
+      borderWidth: borderWidth
+    });
+  };
+      // console.log(filteredData.map(item => item.value));
+        //       data: graphData !== undefined ? graphData.map((item) => getAddedFilteredValues(item)) : monthNames.map((item) => getAddedFilteredValues(item)),
+       addDataset(monthNames, graphData !== undefined ? graphData.map((item) => getAddedFilteredValues(item)) : monthNames.map((item) => getAddedFilteredValues(item)), 'rgba(75,192,192,0.4)', 'rgba(75,192,192,1)', 1);
 
-  // addDataset('Dataset 1', filteredData.map(item => item.value), 'rgba(75,192,192,0.4)', 'rgba(75,192,192,1)', 1);
+  // addDataset(monthNames, filteredData.map(item => item.value), 'rgba(75,192,192,0.4)', 'rgba(75,192,192,1)', 1);
+
   // addDataset('Dataset 2', anotherFilteredData.map(item => item.value), 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)', 2);
-  // // Add as many datasets as you want
-
-//// EXPERIMENTATION
-
+  // Add as many datasets as you want
 
 
 const graphCompiler = () => {
@@ -255,9 +257,13 @@ const graphCompiler = () => {
 
         if(key===serviceName){
           // console.log(value);
-          console.log(value.map(item => item.label));
-          addDataset(key, value.map(item => item.value), 'rgba(75,192,192,0.4)', 'rgba(75,192,192,1)', 1);
+          // console.log(serviceName);
+          // console.log(value.map(item => item.label));
+          // console.log(value.map(item => item.value));
 
+          // addDataset(key, value.map(item => item.value), 'rgba(75,192,192,0.4)', 'rgba(75,192,192,1)', 1);
+          //  labels.map((services) => addDataset(services, graphData.map((period) => getAddedFilteredValues( services, period, startDate, endDate)), '#44bd32', 'rgba(75,192,192,1)', 1))
+          // console.log(labels.map((services) =>services));
           // addDataset(graphData ? graphData : monthNames, value.map(item => item.value), 'rgba(75,192,192,0.4)', 'rgba(75,192,192,1)', 1);
 
           // console.log(graphData.map((item) => getAddedFilteredValues(item)));
@@ -288,6 +294,15 @@ console.log(graphCompiler());
     setSelectedRange('monthNames');
     setStartDate(extract7thDay(366))
   }, [])
+
+
+    
+  // const initialGraph = useMemo(() => {
+  //   const fillGraph = labels.map((services) => addDataset(services, monthNames.map((period) => getAddedFilteredValues( services, period, startDate, endDate)), '#44bd32', 'rgba(75,192,192,1)', 1))
+  //   return fillGraph 
+  // }, [labels, addDataset]);
+
+
 
   return (
     <>
